@@ -34,6 +34,10 @@ app.use('/auth', authRoutes);
 const projectRouter = require('./routes/project.routes')
 app.use('/api/projects', projectRouter)
 
+
+const taskRouter = require('./routes/task.routes')
+app.use('/api/tasks', taskRouter)
+
 const index = require('./routes/index');
 app.use('/', index);
 

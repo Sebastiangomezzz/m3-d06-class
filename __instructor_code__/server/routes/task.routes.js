@@ -18,5 +18,12 @@ router.post('/', (req, res)=>{
     .catch(err=>res.json(err))
 })
 
+router.get('/', (req, res)=>{
+    Task.find()
+    .populate('project')
+    .then( allTheTasks => res.json(allTheTasks))
+    .catch(err=>res.json(err))
+})
+
 module.exports = router
 // the same as 'export defualt' that we have used in frontend code

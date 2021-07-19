@@ -25,5 +25,19 @@ router.get('/', (req, res)=>{
     .catch(err=>res.json(err))
 })
 
+router.get('/:taskId', (req, res) => {
+    const { taskId } = req.params;
+   
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+      res.status(400).json({ message: 'Specified id is not valid' });
+      return;
+    }
+   
+    Task.findById(taskId)
+      .populate('project')
+      .then(task => res.json(task))
+      .catch(err => res.json(err));
+});
+
 module.exports = router
 // the same as 'export defualt' that we have used in frontend code

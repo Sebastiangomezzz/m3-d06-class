@@ -25,7 +25,7 @@ router.get('/', (req, res)=>{
     .catch(err=>res.json(err))
 })
 
-router.get('/:projectId', (req, res, next) => {
+router.get('/:projectId', (req, res) => {
     const { projectId } = req.params;
    
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
@@ -33,13 +33,11 @@ router.get('/:projectId', (req, res, next) => {
       return;
     }
    
-    // Our projects have array of tasks' ids and
-    // we can use .populate() method to get the whole task objects
     Project.findById(projectId)
       .populate('tasks')
-      .then(project => res.status(200).json(project))
-      .catch(error => res.json(error));
-  });
+      .then(project => res.json(project))
+      .catch(err => res.json(err));
+});
 
 
 module.exports = router

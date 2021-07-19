@@ -4,16 +4,17 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Project = require('../models/Project.model')
+const Task = require('../models/Task.model')
 
 router.post('/', (req, res)=>{
-    const { title, description } = req.body
+    const { project, title, description } = req.body
 
-    Project.create({
+    Task.create({
+        project,
         title,
         description
     })
-    .then( createdProject => res.json(createdProject))
+    .then( createdTask => res.json(createdTask))
     .catch(err=>res.json(err))
 })
 
